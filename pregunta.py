@@ -34,7 +34,8 @@ def ingest_data():
             cluster[1] = int(amount)
             cluster[2] = float(percent.replace(',','.'))
 
-            sentence = ' '.join(sentence.pop(0))
+            sentence.pop(0)
+            sentence = ' '.join(sentence)
             cluster[3] += sentence
 
         elif re.match('^ +[a-z]', row):
