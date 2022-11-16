@@ -15,10 +15,6 @@ import re
 
 def ingest_data():
 
-    #
-    # Inserte su código aquí
-    #
-
     with open('clusters_report.txt') as c_report:
         rows = c_report.readlines()
 
@@ -34,9 +30,9 @@ def ingest_data():
         if re.match('^ +[0-9]+ +', row):
             indx, amount, percent, *sentence = row.split()
 
-            cluster[0] = (int(indx))
-            cluster[1] = (int(amount))
-            cluster[2] = (float(percent.replace(',','.')))
+            cluster[0] = int(indx)
+            cluster[1] = int(amount)
+            cluster[2] = float(percent.replace(',','.'))
 
             sentence = ' '.join(sentence.pop(0))
             cluster[3] += sentence
@@ -44,7 +40,7 @@ def ingest_data():
         elif re.match('^ +[a-z]', row):
             sentence = row.split()
             sentence = ' '.join(sentence)
-            cluster[3] += sentence
+            cluster[3] += ' ' + sentence
 
         elif re.match('^\n', row) or re.match('^ +$', row):
             cluster[3] = cluster[3].replace('.', '') 
